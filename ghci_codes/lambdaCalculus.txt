@@ -1,0 +1,95 @@
+-- NOT = \b -> b FALSE TRUE
+-- FALSE = \x y -> y
+-- TRUE = \x y -> x
+
+-- ----------------------------------------
+
+-- NOT FALSE 
+
+-- (\b -> b FALSE TRUE) FALSE
+	
+--			(FALSE)(FALSE TRUE)
+
+--			(\x y -> y)(FALSE TRUE)
+
+--						TRUE
+-- ----------------------------------------
+-- ----------------------------------------
+-- Exercises - The Lambda Calculus
+-- ----------------------------------------
+-- ----------------------------------------
+-- 1 - Keeping in mind alpha equivalence, choose an 
+-- answer that is equivalent to the listed lambda term.
+
+-- 1.1 λxy.xz 
+-- R: (b) λmn.mz
+
+-- 1.2 λxy.xxy
+-- R: (c) λa(λb.aab)
+
+-- 1.3 λxyz.zx
+-- R: (b) λtos.st
+
+-- 2 - Which (two or more) of the following are equivalent?
+-- 1. mth x y z = x * y * z
+-- 2. mth x y = \z -> x * y * z
+-- 3. mth x = \y -> \z -> x * y * z
+-- 4. mth = \x -> \y -> \z -> x * y * z
+-- R: All equivalent to each other
+
+-- 3 - The type of mth (above) is mth :: Num a=> a-> a-> a-> a
+-- Write down the type of => mth 3
+-- R: mth 3 :: Num a => a -> a -> a
+
+-- 4 - Rewrite, using Haskell and evaluate the following:
+-- 1. (λx.x)2
+-- R: (\x -> x)2 ==> 2
+
+-- 2. (λx.(x ∗ 2))4
+-- R: (\x -> x*2)4 ==> 8
+
+-- 3. (λx.(λy.x ∗ y))3 4
+-- R: (\x y -> x*y)3 4 ==> 12
+
+-- 4. (λx.λy.(if x < y then − 1 else if x == y then 0 else 1)) 3 4
+-- (Note: Use of if inside the lambda expression. )
+-- R: (\x y -> if x < y then −1 else if x == y then 0 else 1)3 4 ==> -1
+
+-- 5 - Rewrite the f function in the where clause using anonymous lambda syntax
+-- addOneIfOdd n = case odd n of
+--                  True -> f n
+--                  False -> n
+--                  where f n = n + 1
+-- R: addOneIfOdd n = case odd n of
+--                  True -> (\x -> x+1) n
+--                  False -> n
+
+-- 6 - Rewrite the following to use anonymous lambda syntax
+-- addFive x y = (if x > y then x else y) + 5
+-- R: (\x y -> if x > y then x+5 else y+5) n1 n2
+
+-- 7 - Write a lambda version of the following functions:
+-- 1. abs: which takes an Integer and returns the non-negative value.
+-- e.g. abs -1 = 1, abs 4 = 4.
+-- R: (\x -> if x<0 then (-x) else x) n
+
+-- 2. mymax: which takes two numbers and returns the larger of the two
+-- R: (\x y -> if x>y then x else y) n1 n2
+
+-- 3. mymin: which takes two numbers and returns the smaller of the two
+-- R: (\x y -> if x<y then x else y) n1 n2
+
+-- 8 - Using the techniques seen in class, encode the following using lambda calculus:
+-- 1. AND
+-- R: && ==>T && b = b  ->      TRUE    b   FALSE -> b
+--          F && _ = False ->   FALSE   _   FALSE -> FALSE
+--                              x       y   FALSE
+--   (\x y -> x y FALSE) b1 b2
+
+-- 2. OR
+-- R: || ==>F || b = b  ->      FALSE   TRUE    b -> b
+--          T || _ = True ->    TRUE    TRUE    _ -> TRUE
+--                              x       TRUE    y
+--  (\x y -> x TRUE y) b1 b2
+
+-- FINISHED
